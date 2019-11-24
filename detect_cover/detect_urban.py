@@ -1,7 +1,8 @@
 import numpy as np
  
 
-"""
+def detect_urban(img, green_mask, water_mask):
+    """
     Function to detect urban cover given green and water mask
 
     Arguments:
@@ -9,8 +10,7 @@ import numpy as np
 
     Returns:
     Urban mask of image
-"""
-def detect_urban(img, green_mask, water_mask):
+    """
     urban_mask = np.zeros(water_mask.shape)
     for i in range(water_mask.shape[0]):
         for j in range(water_mask.shape[1]):

@@ -2,13 +2,13 @@ import numpy as np
 import cv2
 
 
-"""
+def variance_filter(img):
+    """
     this function is used to detect intensity variance within a neighbourhood of 9X9.
     cut off variance value used is 13, used in detecting stagnant water.
     input -> Gray scaled image.
     returns binary image, white indicates variance value less than 13.
-"""
-def variance_filter(img):
+    """
     mask = np.zeros(img.shape)
     kSize = 9
     l = kSize // 2
@@ -24,14 +24,14 @@ def variance_filter(img):
 
 
 
-"""
+def detect_water(img):
+    """
     this function detects the amount of water present in a satellite image.
     input -> RGB image of any size.
     returns a binary image indicating the presence of water
     white components indicates presence of water.
     calls variance_filter() function.
-"""
-def detect_water(img):
+    """
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     imgGray = cv2.blur(imgGray, (3, 3))
 

@@ -5,6 +5,13 @@ token = '' # You should put your token here
 px.set_mapbox_access_token(token)
 
 def show_map(data, col):
+    """
+    Visualize green, urban and water cover using mapbox api
+    Arguments:
+    data: Dataframe of results of detected cover (in percent)
+    col: column name of dataframe to plot ('greenery' or 'water' or 'urban')
+    """
+    
     fig = px.scatter_mapbox(data, lat="lat", lon="lon", hover_data=[col],
                             color_discrete_sequence=["fuchsia"], size=col, zoom=15, height=500)
     fig.update_layout(mapbox_style="dark")
