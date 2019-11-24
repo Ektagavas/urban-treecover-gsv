@@ -3,13 +3,14 @@ import urllib.request
 from io import StringIO, BytesIO
 from PIL import Image
 from math import log, exp, tan, atan, pi, ceil
+import pandas as pd
 
 EARTH_RADIUS = 6378137
 EQUATOR_CIRCUMFERENCE = 2 * pi * EARTH_RADIUS
 INITIAL_RESOLUTION = EQUATOR_CIRCUMFERENCE / 256.0
 ORIGIN_SHIFT = EQUATOR_CIRCUMFERENCE / 2.0
 
-DIR_PATH = './data/'
+DIR_PATH = './dataset/nydata/'
 
 # Insert your api key for google maps here
 API_KEY = ''
@@ -90,9 +91,12 @@ for x in range(cols):
         url = 'http://maps.google.com/maps/api/staticmap?' + urlparams
         f=urllib.request.urlopen(url)
         im=Image.open(BytesIO(f.read()))
-        im.save(DIR_PATH+'i'+str(j)+'.png')
-        data.append([round(latn,6), round(lonn,6), str(j)])
+        im.save(DIR_PATH +'ny_'+str(j)+'.png')
+        data.append([round(latn,6), round(lonn,6), 'ny_'+str(j)])
         j += 1
 
 # Create the pandas DataFrame 
 df = pd.DataFrame(data, columns = ['lat', 'lon', 'patch_idx'])
+
+# Save dataframe to csv
+export_csv = df.to_csv (r'./dataset/ny.csv', index = None, header=True) 
