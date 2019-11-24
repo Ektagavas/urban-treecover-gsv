@@ -4,7 +4,15 @@ from detect_cover.detect_water import detect_water
 from detect_cover.detect_urban import detect_urban
 
 
-# Helper function to get percent of foreground pixels from mask
+"""
+    Function to get percent of foreground pixels of given mask
+
+    Arguments:
+    mask: binary image
+
+    Returns:
+    value in percentage
+"""
 def get_percent(mask):
     fg = 0
     total = mask.shape[0] * mask.shape[1]

@@ -1,3 +1,4 @@
+# Import libraries
 import flask
 from flask_cors import CORS, cross_origin
 import numpy as np
@@ -12,6 +13,7 @@ app = flask.Flask(__name__)
 CORS(app)
 app_args = None
 
+# Path to images directory
 DIR_PATH = './dataset/ny_data/'
 
 
@@ -25,12 +27,14 @@ def main () :
     n = len(ny_data.index)
     data = []
 
+    # For each small patch
     for i in range(n):
         path = DIR_PATH + 'ny_' + str(j) + '.jpg'
         img = cv2.imread(path)
 
         # img = cv2.resize(img, (300, 300), interpolation = cv2.INTER_AREA)
 
+        # Find green, water and urban cover percent
         green_pcent, water_pcent, urban_pcent = get_percent_cover(img)
         data.append([green_pcent, water_pcent, urban_pcent])
         print('Image', j)
@@ -40,11 +44,11 @@ def main () :
         print('-----------------------------------------')
         j += 1
     
-    # Create the pandas DataFrame 
+    # Create the DataFrame 
     df = pd.DataFrame(data, columns = ['greenery', 'water', 'urban'])
 
 
-    # Combine lat long and detected cover percent
+    # Combine lat long and detected cover percent for results
     ny_data = pd.concat([df, ny_data], axis=1)
 
     # Print first few rows of results
