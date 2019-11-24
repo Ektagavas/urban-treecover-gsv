@@ -74,6 +74,8 @@ heightplus = height + bottom
 # Store image data
 data = []
 j = 0
+flag = None
+
 for x in range(cols):
     for y in range(rows):
         dxn = width * (0.5 + x)
@@ -94,6 +96,13 @@ for x in range(cols):
         im.save(DIR_PATH +'ny_'+str(j)+'.png')
         data.append([round(latn,6), round(lonn,6), 'ny_'+str(j)])
         j += 1
+
+        # not overshoot a limit for data
+        if j == 1910:
+            flag = False
+            break
+    if flag == False:
+        break
 
 # Create the pandas DataFrame 
 df = pd.DataFrame(data, columns = ['lat', 'lon', 'patch_idx'])

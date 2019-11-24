@@ -1,29 +1,35 @@
+import flask
+from flask_cors import CORS, cross_origin
 import numpy as np
 import cv2
 import pandas as pd
-# from PIL import Image
 from detect_cover.detect_cover import get_percent_cover
 from visualization.visualize import show_map
+import plotly.express as px
+from plotly.offline import iplot
+
+app = flask.Flask(__name__)
+CORS(app)
+app_args = None
 
 DIR_PATH = './dataset/ny_data/'
 
 
 def main () :
     j = 0
-    n = 4
+    
+    # Read lat long from csv
+    ny_data = pd.read_csv('./dataset/ny.csv')
+
+    # Number of small images or locations
+    n = len(ny_data.index)
     data = []
+
     for i in range(n):
-        path = DIR_PATH + 'g' + str(j) + '.png'
+        path = DIR_PATH + 'ny_' + str(j) + '.jpg'
         img = cv2.imread(path)
-        # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        # im_pil = Image.fromarray(img)
 
-        
-        img = cv2.resize(img, (300, 300), interpolation = cv2.INTER_AREA)
-        # img = im_pil.resize((300, 300), Image.LANCZOS)
-
-        # For reversing the operation:
-        # img = np.asarray(img)
+        # img = cv2.resize(img, (300, 300), interpolation = cv2.INTER_AREA)
 
         green_pcent, water_pcent, urban_pcent = get_percent_cover(img)
         data.append([green_pcent, water_pcent, urban_pcent])
@@ -37,20 +43,21 @@ def main () :
     # Create the pandas DataFrame 
     df = pd.DataFrame(data, columns = ['greenery', 'water', 'urban'])
 
-    # Read lat long from csv
-    ny_data = pd.read_csv('./dataset/ny.csv')
 
     # Combine lat long and detected cover percent
-    ny_data = pd.concat([df, ny_data[:4]], axis=1)
+    ny_data = pd.concat([df, ny_data], axis=1)
 
-    # Print few rows of results
+    # Print first few rows of results
     print(ny_data.head())
 
     # Write results to file
     ny_data.to_csv('./dataset/results.csv', index=True)
 
+
     # Visualize data
-    # show_map(ny_data)
+    # show_map(ny_data, "greenery")
+    # show_map(ny_data, "water")
+    # show_map(ny_data, "urban")
 
 
 if __name__ == "__main__":
