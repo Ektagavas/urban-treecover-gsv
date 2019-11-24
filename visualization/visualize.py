@@ -1,7 +1,7 @@
 import plotly.express as px
 from plotly.offline import iplot
 
-token = '' # You should put your token here
+token = 'pk.eyJ1IjoiZWt0YWdhdmFzIiwiYSI6ImNrM2EyNWt6NjAzeHozY28xMWN2a3FxcGUifQ.2n6gJ2YjG_0TUF_MrcQrjg' # You should put your token here
 px.set_mapbox_access_token(token)
 
 def show_map(data, col):

@@ -13,7 +13,7 @@ ORIGIN_SHIFT = EQUATOR_CIRCUMFERENCE / 2.0
 DIR_PATH = './dataset/nydata/'
 
 # Insert your api key for google maps here
-API_KEY = ''
+API_KEY = 'AIzaSyB_2dEesEJY6fmtH9ZzcAhsyqWN_zNjFSo'
 
 
 # Function to convert Lat,Long coordinates to pixels
