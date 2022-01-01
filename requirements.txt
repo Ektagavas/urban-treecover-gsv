@@ -3,4 +3,5 @@ cv2
 flask
 plotly
 flask_cors
-pandas
+pandas 
+matplotlib

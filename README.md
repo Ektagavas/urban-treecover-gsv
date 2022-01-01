@@ -1,4 +1,4 @@
-# Identifying greenery, urban cover and water bodies using google map static images and visualizations 
+# Identifying greenery, urban cover and water bodies using google map static images and visualizations.
 - DATASET: https://iiitaphyd-my.sharepoint.com/:u:/g/personal/vivek_k_research_iiit_ac_in/EZtLOFwDGMtFtF4Fm0hy-9oBkGsd_7KySPGRcZ6CXW-ShQ?e=vO6qvQ
 
 - Reference: http://senseable.mit.edu/treepedia
